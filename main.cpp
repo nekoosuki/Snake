@@ -3,9 +3,9 @@
 int main() {
     system("mode con cols=100 lines=31");
     Pos(COLS / 4, ROWS / 3);
-    cout << "è¯·é€‰æ‹©æ¨¡å¼ 1:ç»å…¸ 2:å¯»æ‰¾çœŸé£Ÿç‰©" << endl;
+    cout << "ÇëÑ¡ÔñÄ£Ê½ 1:¾­µä 2:Ñ°ÕÒÕæÊ³Îï" << endl;
     Pos(COLS / 4, ROWS / 3 + 1);
-    cout << "*åªæœ‰é€€å‡ºæ¸¸æˆæ‰èƒ½é‡æ–°é€‰æ‹©æ¨¡å¼*";
+    cout << "*Ö»ÓÐÍË³öÓÎÏ·²ÅÄÜÖØÐÂÑ¡ÔñÄ£Ê½*";
     int mode;
     cin >> mode;
     system("cls");
