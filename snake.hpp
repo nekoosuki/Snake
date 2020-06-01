@@ -13,7 +13,7 @@ using namespace std;
 #define U 1
 #define D 2
 #define L 3
-#define R 4  //ÉßµÄ×´Ì¬£¬U£ºÉÏ £»D£ºÏÂ£»L:×ó R£ºÓÒ
+#define R 4  //è›‡çš„çŠ¶æ€ï¼ŒUï¼šä¸Š ï¼›Dï¼šä¸‹ï¼›L:å·¦ Rï¼šå³
 
 void Pos(int x, int y);
 

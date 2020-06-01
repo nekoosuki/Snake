@@ -3,17 +3,17 @@
 int main() {
     system("mode con cols=100 lines=31");
     Pos(COLS / 4, ROWS / 3);
-    cout << "ÇëÑ¡ÔñÄ£Ê½ 0:¾­µä 1:Ñ°ÕÒÕæÊ³Îï" << endl;
+    cout << "è¯·é€‰æ‹©æ¨¡å¼ 1:ç»å…¸ 2:å¯»æ‰¾çœŸé£Ÿç‰©" << endl;
     Pos(COLS / 4, ROWS / 3 + 1);
-    cout << "*Ö»ÓÐÍË³öÓÎÏ·²ÅÄÜÖØÐÂÑ¡ÔñÄ£Ê½*";
+    cout << "*åªæœ‰é€€å‡ºæ¸¸æˆæ‰èƒ½é‡æ–°é€‰æ‹©æ¨¡å¼*";
     int mode;
     cin >> mode;
     system("cls");
-    if (mode == 0) {
+    if (mode == 1) {
         gameMo1 Game;
         Game.InitGame();
         Game.GameEntry();
-    } else if (mode == 1) {
+    } else if (mode == 2) {
         gameMo2 Game;
         Game.InitGame();
         Game.GameEntry();

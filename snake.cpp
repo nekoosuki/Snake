@@ -8,26 +8,26 @@ void Pos(int x, int y) {
     pos.X = x;
     pos.Y = y;
     Output = GetStdHandle(
-        STD_OUTPUT_HANDLE);  //·µ»Ø±ê×¼µÄÊäÈë¡¢Êä³ö»ò´íÎóµÄÉè±¸µÄ¾ä±ú£¬Ò²¾ÍÊÇ»ñµÃÊäÈë¡¢Êä³ö/´íÎóµÄÆÁÄ»»º³åÇøµÄ¾ä±ú
+        STD_OUTPUT_HANDLE);  //è¿”å›æ ‡å‡†çš„è¾“å…¥ã€è¾“å‡ºæˆ–é”™è¯¯çš„è®¾å¤‡çš„å¥æŸ„ï¼Œä¹Ÿå°±æ˜¯è·å¾—è¾“å…¥ã€è¾“å‡º/é”™è¯¯çš„å±å¹•ç¼“å†²åŒºçš„å¥æŸ„
     SetConsoleCursorPosition(Output, pos);
 }
 
 void gameBase::InitMap() {
     system("color F3");
     int i;
-    for (i = 0; i <= COLS; i += 2)  //´òÓ¡ÉÏÏÂ±ß¿ò
+    for (i = 0; i <= COLS; i += 2)  //æ‰“å°ä¸Šä¸‹è¾¹æ¡†
     {
         Pos(i, 0);
-        cout << "¡ö";
+        cout << "â– ";
         Pos(i, ROWS - 1);
-        cout << "¡ö";
+        cout << "â– ";
     }
-    for (i = 0; i <= ROWS; i++)  //´òÓ¡×óÓÒ±ß¿ò
+    for (i = 0; i <= ROWS; i++)  //æ‰“å°å·¦å³è¾¹æ¡†
     {
         Pos(1, i);
-        cout << "¡ö";
+        cout << "â– ";
         Pos(COLS - 2, i);
-        cout << "¡ö";
+        cout << "â– ";
     }
 }
 
@@ -50,13 +50,13 @@ void gameBase::DeleteGame() {
 void snake::InitSnake() {
     snake* tail;
     tail = new snake(9, 9);
-    for (int i = 1; i <= 4; i++)  //³õÊ¼³¤¶ÈÎª4
+    for (int i = 1; i <= 4; i++)  //åˆå§‹é•¿åº¦ä¸º4
     {
         GamePTR->head = new snake(9 + 2 * i, 9);
         GamePTR->head->next = tail;
         tail = GamePTR->head;
     }
-    while (tail != NULL)  //´ÓÍ·µ½Î²£¬Êä³öÉßÉí
+    while (tail != NULL)  //ä»å¤´åˆ°å°¾ï¼Œè¾“å‡ºè›‡èº«
     {
         Pos(tail->x, tail->y);
         cout << '+';
@@ -105,7 +105,7 @@ snake* snake::SnakeMove() {
     }
     BiteSelf();
     nexthead->next = GamePTR->head;
-    GamePTR->head = nexthead;  //ÈÃ¡°ÏÖÔÚµÄÉßÍ·¡±Ö¸Õë±ä³É¡°Î´À´µÄÉßÍ·¡±Ö¸Õë
+    GamePTR->head = nexthead;  //è®©â€œç°åœ¨çš„è›‡å¤´â€æŒ‡é’ˆå˜æˆâ€œæœªæ¥çš„è›‡å¤´â€æŒ‡é’ˆ
     return nexthead;
 }
 
@@ -125,25 +125,25 @@ void snake::SpeedDown() {
 
 void snake::PrintSnake(snake* nexthead) {
     if (nexthead->x == GamePTR->Food.x &&
-        nexthead->y == GamePTR->Food.y)  //Èç¹ûÏÂÒ»¸öÓĞÊ³Îï
+        nexthead->y == GamePTR->Food.y)  //å¦‚æœä¸‹ä¸€ä¸ªæœ‰é£Ÿç‰©
     {
-        Pos(GamePTR->head->x, GamePTR->head->y);  //Ö»Òª½«Ê³Îï»»³É¡°Î´À´µÄÉßÍ·¡±
+        Pos(GamePTR->head->x, GamePTR->head->y);  //åªè¦å°†é£Ÿç‰©æ¢æˆâ€œæœªæ¥çš„è›‡å¤´â€
         cout << '+';
         GamePTR->Para.score += GamePTR->Para.add;
         GamePTR->Para.FoodEaten = true;
-    } else  //Èç¹ûÃ»ÓĞÊ³Îï Òª°ÑÉßµÄÃ¿Ò»½ÚÍùÇ°ÒÆ
+    } else  //å¦‚æœæ²¡æœ‰é£Ÿç‰© è¦æŠŠè›‡çš„æ¯ä¸€èŠ‚å¾€å‰ç§»
     {
-        snake* temp = GamePTR->head;  //¶¨Òå¹¤×÷Ö¸Õë
-        while (temp->next->next != NULL)  //µ±¡°ÏÖÔÚµÄÉß¡±µÄµÚ¶ş/Èı/ËÄ...½Ú²»Îª¿Õ
+        snake* temp = GamePTR->head;  //å®šä¹‰å·¥ä½œæŒ‡é’ˆ
+        while (temp->next->next != NULL)  //å½“â€œç°åœ¨çš„è›‡â€çš„ç¬¬äºŒ/ä¸‰/å››...èŠ‚ä¸ä¸ºç©º
         {
             Pos(temp->x, temp->y);
-            cout << '+';  //Êä³ö¡°Î´À´µÄÉß¡±µÄÉßÍ·/µÚ¶ş/Èı...½Ú
-            temp = temp->next;  //¼ÌĞø±éÀúÉß
+            cout << '+';  //è¾“å‡ºâ€œæœªæ¥çš„è›‡â€çš„è›‡å¤´/ç¬¬äºŒ/ä¸‰...èŠ‚
+            temp = temp->next;  //ç»§ç»­éå†è›‡
         }
         Pos(temp->next->x,
-            temp->next->y);  //¾­¹ıÉÏÃæµÄÑ­»· ¹¤×÷Ö¸ÕëÖ¸Ïò¡°ÏÖÔÚµÄÉß¡±µÄµ¹ÊıµÚ¶ş½Ú
-                             //¼´¡°Î´À´µÄÉß¡±µÄÉßÎ²
-        cout << ' ';  //È¥³ı¡°ÏÖÔÚµÄÉß¡±µÄ×îºóÒ»½Ú
+            temp->next->y);  //ç»è¿‡ä¸Šé¢çš„å¾ªç¯ å·¥ä½œæŒ‡é’ˆæŒ‡å‘â€œç°åœ¨çš„è›‡â€çš„å€’æ•°ç¬¬äºŒèŠ‚
+                             //å³â€œæœªæ¥çš„è›‡â€çš„è›‡å°¾
+        cout << ' ';  //å»é™¤â€œç°åœ¨çš„è›‡â€çš„æœ€åä¸€èŠ‚
         temp->next = NULL;
         delete[] temp->next;
     }
@@ -199,20 +199,20 @@ void gameMo1::RunGame() {
             Food.CreateFood();
         }
         Pos(COLS / 5, ROWS);
-        cout << "µÃ·Ö£º" << Para.score;
+        cout << "å¾—åˆ†ï¼š" << Para.score;
         Pos(COLS / 5 + 10, ROWS);
-        cout << "Ã¿¸öÊ³ÎïµÃ·Ö£º" << Para.add << ' ';
+        cout << "æ¯ä¸ªé£Ÿç‰©å¾—åˆ†ï¼š" << Para.add << ' ';
     }
 }
 
 void gameMo1::InitGame() {
     GamePTR = this;
     Pos(COLS / 4, ROWS / 3);
-    cout << "ÓÃ¡ü.¡ı.¡û.¡ú·Ö±ğ¿ØÖÆÉßµÄÒÆ¶¯£¬ F1 Îª¼ÓËÙ£¬F2 Îª¼õËÙ" << endl;
+    cout << "ç”¨â†‘.â†“.â†.â†’åˆ†åˆ«æ§åˆ¶è›‡çš„ç§»åŠ¨ï¼Œ F1 ä¸ºåŠ é€Ÿï¼ŒF2 ä¸ºå‡é€Ÿ" << endl;
     Pos(COLS / 4, ROWS / 3 + 1);
-    cout << "¼ÓËÙ½«ÄÜµÃµ½¸ü¸ßµÄ·ÖÊı¡£" << endl;
+    cout << "åŠ é€Ÿå°†èƒ½å¾—åˆ°æ›´é«˜çš„åˆ†æ•°ã€‚" << endl;
     Pos(COLS / 4, ROWS / 2);
-    cout << endl << "ÇëÑ¡ÔñÄÑ¶È 0:¼òµ¥ 1:ÆÕÍ¨ 2:À§ÄÑ ";
+    cout << endl << "è¯·é€‰æ‹©éš¾åº¦ 0:ç®€å• 1:æ™®é€š 2:å›°éš¾ ";
     cin >> Para.diff;
     switch (Para.diff) {
         case 0:
@@ -238,16 +238,16 @@ void gameMo1::EndGame(int EndGameStatus) {
     system("cls");
     Pos(COLS / 3, ROWS / 3);
     if (EndGameStatus == 1) {
-        cout << "¶Ô²»Æğ£¬Äú×²µ½Ç½ÁË¡£ÓÎÏ·½áÊø¡£";
+        cout << "å¯¹ä¸èµ·ï¼Œæ‚¨æ’åˆ°å¢™äº†ã€‚æ¸¸æˆç»“æŸã€‚";
     } else if (EndGameStatus == 2) {
-        cout << "¶Ô²»Æğ£¬ÄúÒ§µ½×Ô¼ºÁË¡£ÓÎÏ·½áÊø¡£";
+        cout << "å¯¹ä¸èµ·ï¼Œæ‚¨å’¬åˆ°è‡ªå·±äº†ã€‚æ¸¸æˆç»“æŸã€‚";
     } else if (EndGameStatus == 3) {
-        cout << "ÄúÖ÷¶¯½áÊøÁËÓÎÏ·¡£";
+        cout << "æ‚¨ä¸»åŠ¨ç»“æŸäº†æ¸¸æˆã€‚";
     } else {
-        cout << "Î´Öª´íÎó";
+        cout << "æœªçŸ¥é”™è¯¯";
     }
     Pos(COLS / 3, ROWS / 3 + 1);
-    cout << "ÄúµÄµÃ·ÖÊÇ£º" << Para.score << endl;
+    cout << "æ‚¨çš„å¾—åˆ†æ˜¯ï¼š" << Para.score << endl;
     cout << "Quit/Restart? [q/r]" << endl;
     char ch;
     while (1) {
@@ -268,7 +268,7 @@ void gameMo1::GameEntry() {
     Para.FoodEaten = false;
     Para.score = 0;
     system("cls");
-    srand((unsigned)time(NULL));  //ÎªÁË·ÀÖ¹Ã¿´Î²úÉúµÄËæ»úÊıÏàÍ¬£¬ÖÖ×ÓÉèÖÃÎªtime
+    srand((unsigned)time(NULL));  //ä¸ºäº†é˜²æ­¢æ¯æ¬¡äº§ç”Ÿçš„éšæœºæ•°ç›¸åŒï¼Œç§å­è®¾ç½®ä¸ºtime
     InitMap();
     Snake.InitSnake();
     Food.CreateFood();
@@ -308,22 +308,22 @@ void gameMo2::RunGame() {
             fake = true;
         }
         Pos(COLS / 5, ROWS);
-        cout << "µÃ·Ö£º" << Para.score;
+        cout << "å¾—åˆ†ï¼š" << Para.score;
         Pos(COLS / 5 + 10, ROWS);
-        cout << "Ã¿¸öÊ³ÎïµÃ·Ö£º" << Para.add << ' ';
+        cout << "æ¯ä¸ªé£Ÿç‰©å¾—åˆ†ï¼š" << Para.add << ' ';
     }
 }
 
 void gameMo2::InitGame() {
     GamePTR = this;
     Pos(COLS / 4, ROWS / 3 - 1);
-    cout << "Ã¿ÂÖ»áÉú³ÉÖÁ¶à20¸ö¼ÙÊ³Îï£¬È¥Ñ°ÕÒÕæÊ³Îï°É£¡" << endl;
+    cout << "æ¯è½®ä¼šç”Ÿæˆè‡³å¤š20ä¸ªå‡é£Ÿç‰©ï¼Œå»å¯»æ‰¾çœŸé£Ÿç‰©å§ï¼" << endl;
     Pos(COLS / 4, ROWS / 3);
-    cout << "ÓÃ¡ü.¡ı.¡û.¡ú·Ö±ğ¿ØÖÆÉßµÄÒÆ¶¯£¬ F1 Îª¼ÓËÙ£¬F2 Îª¼õËÙ" << endl;
+    cout << "ç”¨â†‘.â†“.â†.â†’åˆ†åˆ«æ§åˆ¶è›‡çš„ç§»åŠ¨ï¼Œ F1 ä¸ºåŠ é€Ÿï¼ŒF2 ä¸ºå‡é€Ÿ" << endl;
     Pos(COLS / 4, ROWS / 3 + 1);
-    cout << "¼ÓËÙ½«ÄÜµÃµ½¸ü¸ßµÄ·ÖÊı¡£" << endl;
+    cout << "åŠ é€Ÿå°†èƒ½å¾—åˆ°æ›´é«˜çš„åˆ†æ•°ã€‚" << endl;
     Pos(COLS / 4, ROWS / 2);
-    cout << endl << "ÇëÑ¡ÔñÄÑ¶È 0:¼òµ¥ 1:ÆÕÍ¨ 2:À§ÄÑ ";
+    cout << endl << "è¯·é€‰æ‹©éš¾åº¦ 0:ç®€å• 1:æ™®é€š 2:å›°éš¾ ";
     cin >> Para.diff;
     switch (Para.diff) {
         case 0:
@@ -349,16 +349,16 @@ void gameMo2::EndGame(int EndGameStatus) {
     system("cls");
     Pos(COLS / 3, ROWS / 3);
     if (EndGameStatus == 1) {
-        cout << "¶Ô²»Æğ£¬Äú×²µ½Ç½ÁË¡£ÓÎÏ·½áÊø¡£";
+        cout << "å¯¹ä¸èµ·ï¼Œæ‚¨æ’åˆ°å¢™äº†ã€‚æ¸¸æˆç»“æŸã€‚";
     } else if (EndGameStatus == 2) {
-        cout << "¶Ô²»Æğ£¬ÄúÒ§µ½×Ô¼ºÁË¡£ÓÎÏ·½áÊø¡£";
+        cout << "å¯¹ä¸èµ·ï¼Œæ‚¨å’¬åˆ°è‡ªå·±äº†ã€‚æ¸¸æˆç»“æŸã€‚";
     } else if (EndGameStatus == 3) {
-        cout << "ÄúÖ÷¶¯½áÊøÁËÓÎÏ·¡£";
+        cout << "æ‚¨ä¸»åŠ¨ç»“æŸäº†æ¸¸æˆã€‚";
     } else {
-        cout << "Î´Öª´íÎó";
+        cout << "æœªçŸ¥é”™è¯¯";
     }
     Pos(COLS / 3, ROWS / 3 + 1);
-    cout << "ÄúµÄµÃ·ÖÊÇ£º" << Para.score << endl;
+    cout << "æ‚¨çš„å¾—åˆ†æ˜¯ï¼š" << Para.score << endl;
     cout << "Quit/Restart? [q/r]" << endl;
     char ch;
     while (1) {
@@ -379,7 +379,7 @@ void gameMo2::GameEntry() {
     Para.FoodEaten = false;
     Para.score = 0;
     system("cls");
-    srand((unsigned)time(NULL));  //ÎªÁË·ÀÖ¹Ã¿´Î²úÉúµÄËæ»úÊıÏàÍ¬£¬ÖÖ×ÓÉèÖÃÎªtime
+    srand((unsigned)time(NULL));  //ä¸ºäº†é˜²æ­¢æ¯æ¬¡äº§ç”Ÿçš„éšæœºæ•°ç›¸åŒï¼Œç§å­è®¾ç½®ä¸ºtime
     InitMap();
     Snake.InitSnake();
     Food.CreateFood();
