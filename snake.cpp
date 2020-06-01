@@ -31,6 +31,8 @@ void gameBase::InitMap() {
     }
 }
 
+int gameBase::GetAdd(int sleeptime) { return (350 - sleeptime) / 15; }
+
 void gameBase::Pause() {
     while (1) {
         Sleep(300);
@@ -112,14 +114,14 @@ snake* snake::SnakeMove() {
 void snake::SpeedUp() {
     if (GamePTR->Para.sleeptime >= 50) {
         GamePTR->Para.sleeptime -= 30;
-        GamePTR->Para.add += 2;
+        GamePTR->Para.add = GamePTR->GetAdd(GamePTR->Para.sleeptime);
     }
 }
 
 void snake::SpeedDown() {
     if (GamePTR->Para.sleeptime < 320) {
         GamePTR->Para.sleeptime += 30;
-        GamePTR->Para.add -= 2;
+        GamePTR->Para.add = GamePTR->GetAdd(GamePTR->Para.sleeptime);
     }
 }
 
@@ -217,19 +219,19 @@ void gameMo1::InitGame() {
     switch (Para.diff) {
         case 0:
             Para.sleeptime = 290;
-            Para.add = 4;
+            Para.add = GetAdd(Para.sleeptime);
             break;
         case 1:
             Para.sleeptime = 200;
-            Para.add = 10;
+            Para.add = GetAdd(Para.sleeptime);
             break;
         case 2:
-            Para.sleeptime = 110;
-            Para.add = 16;
+            Para.sleeptime = 50;
+            Para.add = GetAdd(Para.sleeptime);
             break;
         default:
             Para.sleeptime = 200;
-            Para.add = 10;
+            Para.add = GetAdd(Para.sleeptime);
             break;
     }
 }
@@ -335,8 +337,8 @@ void gameMo2::InitGame() {
             Para.add = 10;
             break;
         case 2:
-            Para.sleeptime = 110;
-            Para.add = 16;
+            Para.sleeptime = 50;
+            Para.add = 20;
             break;
         default:
             Para.sleeptime = 200;

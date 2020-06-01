@@ -79,6 +79,7 @@ class gameBase {
     virtual void InitGame() = 0;
     virtual void EndGame(int EndGameStatus) = 0;
     virtual void GameEntry() = 0;
+    int GetAdd(int sleeptime);
     void Pause();
     void DeleteGame();
 };
