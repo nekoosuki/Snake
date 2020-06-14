@@ -35,9 +35,11 @@ class para {
 };
 
 class snake {
+   protected:
+    int x, y;
+
    public:
     snake* next;
-    int x, y;
     snake() {
         x = y = 0;
         next = NULL;
@@ -47,6 +49,7 @@ class snake {
         this->y = y;
         next = NULL;
     }
+    friend bool EatFood(food Food, snake Snake);
     void InitSnake();
     void BiteSelf();
     void HitWall();
@@ -66,7 +69,7 @@ class food {
         this->x = x;
         this->y = y;
     }
-    bool EatFood(int snakeX, int snakeY);
+    friend bool EatFood(food Food, snake Snake);
     void CreateFood();
 };
 

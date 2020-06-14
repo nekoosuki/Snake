@@ -129,7 +129,7 @@ void snake::PrintSnake(snake* nexthead) {
     // if (nexthead->x == GamePTR->Food.x &&
     //     nexthead->y == GamePTR->Food.y)  //如果下一个有食物
     // {
-    if (GamePTR->Food.EatFood(nexthead->x, nexthead->y)) {
+    if (EatFood(GamePTR->Food, *nexthead)) {
         Pos(GamePTR->head->x, GamePTR->head->y);  //只要将食物换成“未来的蛇头”
         cout << '+';
         GamePTR->Para.score += GamePTR->Para.add;
@@ -152,8 +152,8 @@ void snake::PrintSnake(snake* nexthead) {
     }
 }
 
-bool food::EatFood(int snakeX, int snakeY) {
-    return snakeX == x && snakeY == y ? true : false;
+bool EatFood(food Food, snake Snake) {
+    return Food.x == Snake.x && Food.y == Snake.y ? true : false;
 }
 
 void food::CreateFood() {
@@ -164,7 +164,7 @@ void food::CreateFood() {
     foodtemp->y = rand() % (ROWS - 2) + 1;
     snake* temp = GamePTR->head;
     while (temp->next) {
-        if (temp->x == foodtemp->x && temp->y == foodtemp->y) {
+        if (EatFood(*foodtemp, *temp)) {
             delete[] foodtemp;
             return;
         }
