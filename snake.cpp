@@ -126,13 +126,10 @@ void snake::SpeedDown() {
 }
 
 void snake::PrintSnake(snake* nexthead) {
-    // if (nexthead->x == GamePTR->Food.x &&
-    //     nexthead->y == GamePTR->Food.y)  //如果下一个有食物
-    // {
     if (EatFood(GamePTR->Food, *nexthead)) {
-        Pos(GamePTR->head->x, GamePTR->head->y);  //只要将食物换成“未来的蛇头”
+        Pos(GamePTR->head->x, GamePTR->head->y);  //如果下一个有食物
         cout << '+';
-        GamePTR->Para.score += GamePTR->Para.add;
+        GamePTR->Para.score += GamePTR->Para.add;//只要将食物换成“未来的蛇头”
         GamePTR->Para.FoodEaten = true;
     } else  //如果没有食物 要把蛇的每一节往前移
     {
@@ -176,7 +173,6 @@ void food::CreateFood() {
     cout << '$';
     GamePTR->Para.FoodEaten = false;
     delete[] foodtemp;
-    return;
 }
 
 void gameMo1::RunGame() {
