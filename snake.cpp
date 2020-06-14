@@ -52,7 +52,7 @@ void gameBase::DeleteGame() {
 void snake::InitSnake() {
     snake* tail;
     tail = new snake(9, 9);
-    for (int i = 1; i <= 4; i++)  //初始长度为4
+    for (int i = 1; i <= 4; i++)  //初始长度为5
     {
         GamePTR->head = new snake(9 + 2 * i, 9);
         GamePTR->head->next = tail;
@@ -126,9 +126,10 @@ void snake::SpeedDown() {
 }
 
 void snake::PrintSnake(snake* nexthead) {
-    if (nexthead->x == GamePTR->Food.x &&
-        nexthead->y == GamePTR->Food.y)  //如果下一个有食物
-    {
+    // if (nexthead->x == GamePTR->Food.x &&
+    //     nexthead->y == GamePTR->Food.y)  //如果下一个有食物
+    // {
+    if (GamePTR->Food.EatFood(nexthead->x, nexthead->y)) {
         Pos(GamePTR->head->x, GamePTR->head->y);  //只要将食物换成“未来的蛇头”
         cout << '+';
         GamePTR->Para.score += GamePTR->Para.add;
@@ -149,6 +150,10 @@ void snake::PrintSnake(snake* nexthead) {
         temp->next = NULL;
         delete[] temp->next;
     }
+}
+
+bool food::EatFood(int snakeX, int snakeY) {
+    return snakeX == x && snakeY == y ? true : false;
 }
 
 void food::CreateFood() {

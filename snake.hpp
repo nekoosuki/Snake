@@ -57,13 +57,16 @@ class snake {
 };
 
 class food {
-   public:
+   protected:
     int x, y;
+
+   public:
     food() { x = y = 0; }
     food(int x, int y) {
         this->x = x;
         this->y = y;
     }
+    bool EatFood(int snakeX, int snakeY);
     void CreateFood();
 };
 
