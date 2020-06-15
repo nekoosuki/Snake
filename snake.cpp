@@ -129,15 +129,14 @@ void snake::PrintSnake(snake* nexthead) {
     if (EatFood(GamePTR->Food, *nexthead)) {
         Pos(GamePTR->head->x, GamePTR->head->y);  //如果下一个有食物
         cout << '+';
-        GamePTR->Para.score += GamePTR->Para.add;//只要将食物换成“未来的蛇头”
+        GamePTR->Para.score += GamePTR->Para.add;  //只要将食物换成“未来的蛇头”
         GamePTR->Para.FoodEaten = true;
-    } else  //如果没有食物 要把蛇的每一节往前移
-    {
+    } else {  //如果没有食物 要把蛇的每一节往前移
         snake* temp = GamePTR->head;  //定义工作指针
         while (temp->next->next != NULL)  //当“现在的蛇”的第二/三/四...节不为空
         {
             Pos(temp->x, temp->y);
-            cout << '+';  //输出“未来的蛇”的蛇头/第二/三...节
+            cout << '+';  //输出“未来的蛇”的蛇 头/第二/三...节
             temp = temp->next;  //继续遍历蛇
         }
         Pos(temp->next->x,

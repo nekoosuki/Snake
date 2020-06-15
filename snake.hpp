@@ -15,6 +15,7 @@ using namespace std;
 #define L 3
 #define R 4  //蛇的状态，U：上 ；D：下；L:左 R：右
 
+//设定坐标
 void Pos(int x, int y);
 
 class para;
@@ -39,6 +40,7 @@ class snake {
     int x, y;
 
    public:
+    //链表结构 指向下一节蛇身
     snake* next;
     snake() {
         x = y = 0;
@@ -49,13 +51,21 @@ class snake {
         this->y = y;
         next = NULL;
     }
+    //判断坐标重叠，用于判断吃食物和防止食物生成在蛇的位置
     friend bool EatFood(food Food, snake Snake);
+    //初始化蛇
     void InitSnake();
+    //判断蛇咬到自己
     void BiteSelf();
+    //判断蛇撞到边界
     void HitWall();
+    //判断移动后蛇的位置
     snake* SnakeMove();
+    //加速F1
     void SpeedUp();
+    //减速F2
     void SpeedDown();
+    //输出整条蛇
     void PrintSnake(snake* nexthead);
 };
 
@@ -70,42 +80,60 @@ class food {
         this->y = y;
     }
     friend bool EatFood(food Food, snake Snake);
+    //创建食物
     void CreateFood();
 };
 
+//抽象类
 class gameBase {
    public:
     snake Snake;
+    //链表结构 指向蛇头
     snake* head;
     food Food;
     para Para;
     gameBase() {}
     virtual void RunGame() = 0;
+    //初始化地图
     void InitMap();
     virtual void InitGame() = 0;
     virtual void EndGame(int EndGameStatus) = 0;
     virtual void GameEntry() = 0;
+    //通过步时获取加分
     int GetAdd(int sleeptime);
+    //暂停游戏
     void Pause();
+    //结束一局游戏后删除全部对象
     void DeleteGame();
 };
 
+//普通模式
 class gameMo1 : public gameBase {
    public:
     gameMo1() {}
+    //游戏运行时的函数
     void RunGame();
+    //初始化游戏参数 说明页面
     void InitGame();
+    //结束游戏页面
     void EndGame(int EndGameStatus);
+    //初始化游戏
     void GameEntry();
 };
 
+//寻找真食物模式
 class gameMo2 : public gameBase {
    public:
+    //是否生成过假食物
     bool fake;
     gameMo2() {}
+    //游戏运行时的函数
     void RunGame();
+    //初始化游戏参数 说明页面
     void InitGame();
+    //结束游戏页面
     void EndGame(int EndGameStatus);
+    //初始化游戏
     void GameEntry();
 };
 
